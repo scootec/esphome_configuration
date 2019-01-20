@@ -1,0 +1,38 @@
+esphomeyaml:
+  name: garage_door
+  platform: ESP8266
+  board: esp01_1m
+
+wifi:
+  ssid: !secret wifi_ssid
+  password: !secret wifi_password
+
+mqtt:
+  broker: !secret mqtt_broker
+  port: 8883
+  username: !secret mqtt_username
+  password: !secret mqtt_password
+
+# Enable logging
+logger:
+
+ota:
+  password: !secret ota_password
+
+switch:
+  - platform: gpio
+    pin: GPIO12
+    id: relay
+
+cover:
+  - platform: template
+    name: "Garage Door"
+    optimistic: yes
+    open_action:
+    - switch.turn_on: relay
+    - delay: 100ms
+    - switch.turn_off: relay
+    close_action:
+    - switch.turn_on: relay
+    - delay: 100ms
+    - switch.turn_off: relay

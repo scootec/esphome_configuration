@@ -1,0 +1,42 @@
+esphomeyaml:
+  name: bedroom_lamp
+  platform: ESP8266
+  board: esp01_1m
+
+wifi:
+  ssid: !secret wifi_ssid
+  password: !secret wifi_password
+
+mqtt:
+  broker: !secret mqtt_broker
+  port: 8883
+  username: !secret mqtt_username
+  password: !secret mqtt_password
+
+# Enable logging
+logger:
+
+ota:
+  password: !secret ota_password
+
+binary_sensor:
+  - platform: gpio
+    pin:
+      number: GPIO0
+      mode: INPUT_PULLUP
+      inverted: True
+    name: "Bedroom Lamp Button"
+    on_press:
+      then:
+        - light.toggle: bedroom_lamp
+
+output:
+  - platform: gpio
+    id: relay
+    pin: GPIO12
+
+light:
+  - platform: binary
+    id: bedroom_lamp
+    name: "Bedroom Lamp"
+    output: relay
