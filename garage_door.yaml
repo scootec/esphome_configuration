@@ -9,7 +9,6 @@ wifi:
 
 mqtt:
   broker: !secret mqtt_broker
-  port: 8883
   username: !secret mqtt_username
   password: !secret mqtt_password
 
@@ -24,10 +23,26 @@ switch:
     pin: GPIO12
     id: relay
 
+binary_sensor:
+  - platform: gpio
+    name: "Garage Door Switch"
+    id: garage_door_switch
+    pin: 
+      number: GPIO14
+      mode: INPUT_PULLUP
+    filters:
+      - delayed_on: 100ms
+      - delayed_off: 100ms
+
 cover:
   - platform: template
     name: "Garage Door"
-    optimistic: yes
+    lambda: !lambda |-
+      if (id(garage_door_switch).state) {
+        return cover::COVER_CLOSED;
+      } else {
+        return cover::COVER_OPEN;
+      }
     open_action:
     - switch.turn_on: relay
     - delay: 100ms
