@@ -17,6 +17,7 @@ mqtt:
 logger:
 
 ota:
+  safe_mode: True
   password: !secret ota_password
 
 binary_sensor:
