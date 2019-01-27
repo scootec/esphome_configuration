@@ -1,16 +1,27 @@
+substitutions:
+  device_name: bedroom_lamp
+  friendly_name: Bedroom Lamp
+
 esphomeyaml:
-  name: bedroom_lamp
+  name: ${device_name}
   platform: ESP8266
   board: esp01_1m
 
 wifi:
   ssid: !secret wifi_ssid
   password: !secret wifi_password
+  manual_ip:
+    static_ip: 192.168.1.241
+    gateway: 192.168.1.1
+    subnet: 255.255.255.0
 
-mqtt:
-  broker: !secret mqtt_broker
-  username: !secret mqtt_username
-  password: !secret mqtt_password
+api:
+  password: !secret api_password
+
+# mqtt:
+#   broker: !secret mqtt_broker
+#   username: !secret mqtt_username
+#   password: !secret mqtt_password
 
 # Enable logging
 logger:
@@ -25,10 +36,11 @@ binary_sensor:
       number: GPIO0
       mode: INPUT_PULLUP
       inverted: True
-    name: "Bedroom Lamp Button"
+    name: ${friendly_name} Button
+    id: ${device_name}_button
     on_press:
       then:
-        - light.toggle: bedroom_lamp
+        - light.toggle: ${device_name}
 
 output:
   - platform: gpio
@@ -37,6 +49,6 @@ output:
 
 light:
   - platform: binary
-    id: bedroom_lamp
-    name: "Bedroom Lamp"
+    id: ${device_name}
+    name: $friendly_name
     output: relay
