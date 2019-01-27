@@ -1,6 +1,6 @@
 substitutions:
-  device_name: bedroom_lamp
-  friendly_name: Bedroom Lamp
+  device_name: kitchen_light
+  friendly_name: Kitchen Light
 
 esphomeyaml:
   name: ${device_name}
@@ -11,7 +11,7 @@ wifi:
   ssid: !secret wifi_ssid
   password: !secret wifi_password
   manual_ip:
-    static_ip: 192.168.1.241
+    static_ip: 192.168.1.242
     gateway: 192.168.1.1
     subnet: 255.255.255.0
 
@@ -33,12 +33,14 @@ text_sensor:
 binary_sensor:
   - platform: gpio
     pin:
-      number: GPIO0
+      number: GPIO14
       mode: INPUT_PULLUP
       inverted: True
-    name: ${friendly_name} Button
-    id: ${device_name}_button
+    name: ${friendly_name} Switch
     on_press:
+      then:
+        - light.toggle: ${device_name}
+    on_release:
       then:
         - light.toggle: ${device_name}
 
@@ -50,5 +52,5 @@ output:
 light:
   - platform: binary
     id: ${device_name}
-    name: $friendly_name
+    name: ${friendly_name}
     output: relay
