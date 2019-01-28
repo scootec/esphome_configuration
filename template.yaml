@@ -1,0 +1,32 @@
+substitutions:
+  device_name: device_name
+  friendly_name: Friendly Name
+
+esphomeyaml:
+  name: ${device_name}
+  platform: ESP8266
+# Check the board type first!!!  
+  board: esp01_1m
+
+wifi:
+  ssid: !secret wifi_ssid
+  password: !secret wifi_password
+  manual_ip:
+    static_ip: 192.168.1.24X
+    gateway: 192.168.1.1
+    subnet: 255.255.255.0
+
+api:
+  password: !secret api_password
+
+# Enable logging
+logger:
+
+ota:
+  safe_mode: True
+  password: !secret ota_password
+
+text_sensor:
+  - platform: version
+    name: ${friendly_name} Version
+    id: ${device_name}_version
