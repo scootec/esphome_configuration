@@ -1,16 +1,23 @@
+substitutions:
+  device_name: study_lamp
+  friendly_name: Study Lamp
+
 esphomeyaml:
-  name: study_lamp
+  name: ${device_name}
   platform: ESP8266
+# Check the board type first!!!  
   board: esp01_1m
 
 wifi:
   ssid: !secret wifi_ssid
   password: !secret wifi_password
+  manual_ip:
+    static_ip: 192.168.1.244
+    gateway: 192.168.1.1
+    subnet: 255.255.255.0
 
-mqtt:
-  broker: !secret mqtt_broker
-  username: !secret mqtt_username
-  password: !secret mqtt_password
+api:
+  password: !secret api_password
 
 # Enable logging
 logger:
@@ -18,6 +25,11 @@ logger:
 ota:
   safe_mode: True
   password: !secret ota_password
+
+text_sensor:
+  - platform: version
+    name: ${friendly_name} Version
+    id: ${device_name}_version
 
 binary_sensor:
   - platform: gpio
