@@ -58,12 +58,13 @@ cover:
   - platform: template
     name: ${friendly_name}
     id: ${device_name}
-    lambda: !lambda |-
-      if (id(${device_name}_switch).state) {
-        return cover::COVER_CLOSED;
-      } else {
-        return cover::COVER_OPEN;
-      }
+    # lambda: !lambda |-
+    #   if (id(${device_name}_switch).state) {
+    #     return cover::COVER_CLOSED;
+    #   } else {
+    #     return cover::COVER_OPEN;
+    #   }
+    optimistic: true
     open_action:
     - switch.turn_on: relay
     - delay: 100ms
