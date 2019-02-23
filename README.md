@@ -1,4 +1,4 @@
-# esphomeyaml_configuration
+# esphome_configuration
 
 Git repository containing my configuration for my ESPHome devices
 
