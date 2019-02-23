@@ -3,7 +3,7 @@ substitutions:
   friendly_name: Bedroom Lamp
   static_ip: 192.168.1.241
 
-esphomeyaml:
+esphome:
   name: ${device_name}
   platform: ESP8266
   board: esp01_1m

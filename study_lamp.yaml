@@ -3,12 +3,11 @@ substitutions:
   friendly_name: Study Lamp
   static_ip: 192.168.1.244
 
-esphomeyaml:
+esphome:
   name: ${device_name}
   platform: ESP8266
   board: esp01_1m
   board_flash_mode: dout
-
 
 wifi:
   ssid: !secret wifi_ssid
