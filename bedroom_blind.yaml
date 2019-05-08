@@ -1,7 +1,6 @@
 substitutions:
   device_name: bedroom_blind
   friendly_name: Bedroom Blind
-  static_ip: 192.168.1.246
 
 esphome:
   name: ${device_name}
@@ -12,20 +11,20 @@ wifi:
   ssid: !secret wifi_ssid
   password: !secret wifi_password
   manual_ip:
-    static_ip: ${static_ip}
+    static_ip: !secret ip_bedroom_blind
     gateway: 192.168.1.1
     subnet: 255.255.255.0
 
 api:
   password: !secret api_password
   services:
-  - service: control_stepper
-    variables:
-      target: int
-    then:
-      - stepper.set_target:
-          id: my_stepper
-          target: !lambda 'return target;'
+    - service: control_stepper
+      variables:
+        target: int
+      then:
+        - stepper.set_target:
+            id: my_stepper
+            target: !lambda "return target;"
 
 # Enable logging
 logger:
@@ -55,13 +54,13 @@ switch:
     name: ${friendly_name} Reset
     id: ${device_name}_reset
     turn_on_action:
-    - stepper.report_position:
-        id: my_stepper
-        position: 35000
+      - stepper.report_position:
+          id: my_stepper
+          position: 35000
     turn_off_action:
-    - stepper.report_position:
-        id: my_stepper
-        position: 0
+      - stepper.report_position:
+          id: my_stepper
+          position: 0
 
 stepper:
   - platform: uln2003

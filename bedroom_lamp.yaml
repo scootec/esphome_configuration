@@ -1,7 +1,6 @@
 substitutions:
   device_name: bedroom_lamp
   friendly_name: Bedroom Lamp
-  static_ip: 192.168.1.241
 
 esphome:
   name: ${device_name}
@@ -13,7 +12,7 @@ wifi:
   ssid: !secret wifi_ssid
   password: !secret wifi_password
   manual_ip:
-    static_ip: ${static_ip}
+    static_ip: !secret ip_bedroom_lamp
     gateway: 192.168.1.1
     subnet: 255.255.255.0
 
@@ -46,6 +45,9 @@ binary_sensor:
       inverted: True
     name: ${friendly_name} Button
     id: ${device_name}_button
+    # on_click:
+    #   min_length: 0ms
+    #   max_length: 250ms
     on_press:
       then:
         - light.toggle: ${device_name}

@@ -1,7 +1,6 @@
 substitutions:
   device_name: kitchen_light
   friendly_name: Kitchen Light
-  static_ip: 192.168.1.242
 
 esphome:
   name: ${device_name}
@@ -13,7 +12,7 @@ wifi:
   ssid: !secret wifi_ssid
   password: !secret wifi_password
   manual_ip:
-    static_ip: ${static_ip}
+    static_ip: !secret ip_kitchen_light
     gateway: 192.168.1.1
     subnet: 255.255.255.0
 
