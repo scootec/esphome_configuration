@@ -11,3 +11,4 @@
 **/.esphomelib_version
 /secrets.yaml
 *.csv
+.DS_Store
