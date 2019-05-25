@@ -26,6 +26,11 @@ ota:
   safe_mode: True
   password: !secret ota_password
 
+status_led:
+  pin:
+    number: GPIO13
+    inverted: yes
+
 text_sensor:
   - platform: version
     name: ${friendly_name} Version
@@ -45,10 +50,8 @@ binary_sensor:
       inverted: True
     name: ${friendly_name} Button
     id: ${device_name}_button
-    # on_click:
-    #   min_length: 0ms
-    #   max_length: 250ms
-    on_press:
+    on_click:
+      max_length: 250ms
       then:
         - light.toggle: ${device_name}
 
