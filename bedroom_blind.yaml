@@ -71,5 +71,5 @@ stepper:
     pin_d: D4
     max_speed: 250 steps/s
     sleep_when_done: true
-    acceleration: 50
-    deceleration: 50
+    acceleration: 25
+    deceleration: 25
