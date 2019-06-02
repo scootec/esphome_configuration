@@ -57,6 +57,7 @@ cover:
   - platform: template
     name: ${friendly_name}
     id: ${device_name}
+    device_class: garage
     # lambda: !lambda |-
     #   if (id(${device_name}_switch).state) {
     #     return cover::COVER_CLOSED;
