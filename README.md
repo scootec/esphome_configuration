@@ -8,7 +8,8 @@ Any device specific variables are stored in the substitutions at the top of the 
 new device deployment simpler.
 
 Use the following code to update all (assuming you are using fish):
-```
+
+```fish
 for file in *.yaml
     esphome $file compile
     esphome $file upload
