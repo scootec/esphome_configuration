@@ -53,6 +53,7 @@ switch:
   - platform: template
     name: ${friendly_name} Reset
     id: ${device_name}_reset
+    optimistic: true
     turn_on_action:
       - stepper.report_position:
           id: my_stepper
@@ -69,7 +70,7 @@ stepper:
     pin_b: D2
     pin_c: D3
     pin_d: D4
-    max_speed: 250 steps/s
+    max_speed: 300 steps/s
     sleep_when_done: true
     acceleration: 25
     deceleration: 25
