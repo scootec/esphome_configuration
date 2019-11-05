@@ -16,11 +16,13 @@ wifi:
     gateway: 192.168.1.1
     subnet: 255.255.255.0
 
-api:
-  password: !secret api_password
+mqtt:
+  broker: !secret mqtt_broker
+  username: !secret mqtt_username
+  password: !secret mqtt_password
 
-# Enable logging
 logger:
+  level: INFO
 
 ota:
   safe_mode: True
@@ -33,8 +35,8 @@ status_led:
 
 text_sensor:
   - platform: version
-    name: ${friendly_name} Version
-    id: ${device_name}_version
+    name: ${friendly_name} espHome Version
+    id: ${device_name}_esphome_version
 
 sensor:
   - platform: wifi_signal
