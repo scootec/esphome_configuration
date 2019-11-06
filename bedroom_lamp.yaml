@@ -8,41 +8,12 @@ esphome:
   board: esp01_1m
   board_flash_mode: dout
 
-wifi:
-  ssid: !secret wifi_ssid
-  password: !secret wifi_password
-  manual_ip:
-    static_ip: !secret ip_bedroom_lamp
-    gateway: 192.168.1.1
-    subnet: 255.255.255.0
-
-mqtt:
-  broker: !secret mqtt_broker
-  username: !secret mqtt_username
-  password: !secret mqtt_password
-
-logger:
-  level: INFO
-
-ota:
-  safe_mode: True
-  password: !secret ota_password
+<<: !include common/common.yaml
 
 status_led:
   pin:
     number: GPIO13
     inverted: yes
-
-text_sensor:
-  - platform: version
-    name: ${friendly_name} espHome Version
-    id: ${device_name}_esphome_version
-
-sensor:
-  - platform: wifi_signal
-    name: ${friendly_name} Signal
-    id: ${device_name}_signal
-    update_interval: 60s
 
 binary_sensor:
   - platform: gpio
