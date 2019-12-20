@@ -8,7 +8,7 @@ esphome:
   board: esp01_1m
   board_flash_mode: dout
 
-<<: !include common/common.yaml
+<<: !include common.yaml
 
 status_led:
   pin:
