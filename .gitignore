@@ -12,3 +12,4 @@
 /secrets.yaml
 *.csv
 .DS_Store
+.python-version
